@@ -66,7 +66,6 @@ body, p, ul, li, h1,h2,h3,h4,ol,span,b,i {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    cursor: pointer;
   }
   /* Start: Menu */
   .menu__wrap {
