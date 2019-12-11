@@ -1,31 +1,38 @@
 <template>
   <div id="app">
     <header>
-      <a href="/" class="logo"><img src="@/assets/logo.jpg" alt="logo"></a>
+      <a
+        :href="urlHome"
+        class="logo"
+      >
+        <img
+          src="@/assets/logo.jpg"
+          alt="logo"
+        >
+      </a>
       <div
-        class="menu__wrap"
-        :class="{ nav__mobile: btnBurger }"
+        :class="[{ nav__mobile: menuClass.btnBurger }, menuClass.menuWrap]"
       >
         <button
           class="nav__burger"
-          @click="myFunction"
+          @click="activeMenu"
         />
         <div id="nav">
           <router-link
             class="nav__item"
-            to="/"
+            :to="urlSite.urlHome"
           >
             Home
           </router-link>
           <router-link
             class="nav__item"
-            to="/about"
+            :to="urlSite.urlAbout"
           >
             About
           </router-link>
           <router-link
             class="nav__item"
-            to="/test"
+            :to="urlSite.urlTest"
           >
             test
           </router-link>
@@ -36,29 +43,36 @@
   </div>
 </template>
 <script>
+import urlSite from '@/constants';
+
 export default {
+  // components: { urlSite },
   data() {
     return {
-      btnBurger: false,
+      urlSite,
+      menuClass: {
+        menuWrap: 'menu__wrap',
+        btnBurger: false,
+      },
     };
   },
   methods: {
-    myFunction() {
-      this.btnBurger = !this.btnBurger;
+    activeMenu() {
+      this.menuClass.btnBurger = !this.menuClass.btnBurger;
     },
   },
 };
 </script>
 <style>
-body, p, ul, li, h1,h2,h3,h4,ol,span,b,i {
+body, p, ul, li, h1, h2, h3, h4, ol, span, b, i {
     margin: 0;
     padding: 0;
   }
   /* Start: Header */
   header {
-    background-color: #002a32;
     display: flex;
     align-items: center;
+    background-color: #002a32;
     justify-content: space-between;
     padding: 30px;
   }
@@ -83,9 +97,6 @@ body, p, ul, li, h1,h2,h3,h4,ol,span,b,i {
   }
   .nav__item:hover {
     box-shadow: #002a32;
-    -webkit-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 40px 0px rgba(0,0,0,0.75);
     transition: 0.3s;
   }
   .nav__burger {
@@ -102,9 +113,9 @@ body, p, ul, li, h1,h2,h3,h4,ol,span,b,i {
       cursor: pointer;
     }
     .nav__item {
+        display: none;
         width: 100%;
         margin-bottom: 10px;
-        display: none;
     }
     .nav__mobile .nav__burger {
       background-color: red;
